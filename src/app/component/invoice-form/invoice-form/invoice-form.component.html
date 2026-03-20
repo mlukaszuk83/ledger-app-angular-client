@@ -1,0 +1,158 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form #invoiceForm="ngForm"
+      (ngSubmit)="invoiceForm.form.valid && onSubmit()">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text"
+                [(ngModel)]="invoice.name"
+                class="form-control"
+                id="name"
+                name="name"
+                #name="ngModel"
+                [ngClass]="{ 'is-invalid': invoiceForm.submitted && name.invalid }"
+                required>
+              <div class="invalid-feedback" *ngIf="invoiceForm.submitted && name.invalid">
+                <p *ngIf="name.errors">Name is required</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Type</label>
+              <select class="form-control"
+                name="types"
+                #types="ngModel"
+                [ngClass]="{ 'is-invalid': invoiceForm.submitted && types.invalid }"
+                [(ngModel)]="invoice.invoiceType"
+                required>
+                <option *ngFor="let type of invoiceTypes" [value]="type">
+                  {{type}}
+                </option>
+              </select>
+              <div class="invalid-feedback" *ngIf="invoiceForm.submitted && types.invalid">
+                <p *ngIf="types.errors">Type is required</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="name">Net value</label>
+              <input type="text"
+                [(ngModel)]="invoice.netValue"
+                class="form-control"
+                id="netValue"
+                name="netValue"
+                #netValue="ngModel"
+                [ngClass]="{ 'is-invalid': invoiceForm.submitted && netValue.invalid }"
+                required>
+              <div class="invalid-feedback" *ngIf="invoiceForm.submitted && netValue.invalid">
+                <p *ngIf="netValue.errors">Net value is required</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="name">Issue date</label>
+              <div class="input-group">
+                <input [(ngModel)]="invoice.issueDate"
+                  class="form-control"
+                  id="issueDate"
+                  name="issueDate"
+                  #issueDate="ngModel"
+                  [ngClass]="{ 'is-invalid': invoiceForm.submitted && issueDate.invalid }"
+                  placeholder="yyyy-mm-dd"
+                  ngbDatepicker #issueDateDp="ngbDatepicker"
+                  required>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar"
+                    (click)="issueDateDp.toggle()"
+                    type="button"></button>
+                </div>
+                <div class="invalid-feedback" *ngIf="invoiceForm.submitted && issueDate.invalid">
+                  <p *ngIf="issueDate.errors">Issue date is required</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Kind</label>
+              <select class="form-control"
+                name="kinds"
+                #kinds="ngModel"
+                [ngClass]="{ 'is-invalid': invoiceForm.submitted && kinds.invalid }"
+                [(ngModel)]="invoice.invoiceKind"
+                required>
+                <option *ngFor="let kind of invoiceKinds" [value]="kind">
+                  {{kind}}
+                </option>
+              </select>
+              <div class="invalid-feedback" *ngIf="invoiceForm.submitted && kinds.invalid">
+                <p *ngIf="types.errors">Kind is required</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="name">Gross value</label>
+              <input type="text"
+                [(ngModel)]="invoice.grossValue"
+                class="form-control"
+                id="grossValue"
+                name="grossValue"
+                #grossValue="ngModel"
+                [ngClass]="{ 'is-invalid': invoiceForm.submitted && grossValue.invalid }"
+                required>
+              <div class="invalid-feedback" *ngIf="invoiceForm.submitted && grossValue.invalid">
+                <p *ngIf="grossValue.errors">Gross value is required</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="name">Sale date</label>
+              <div class="input-group">
+                <input [(ngModel)]="invoice.saleDate"
+                  class="form-control"
+                  id="saleDate"
+                  name="saleDate"
+                  #saleDate="ngModel"
+                  [ngClass]="{ 'is-invalid': invoiceForm.submitted && saleDate.invalid }"
+                  placeholder="yyyy-mm-dd"
+                  ngbDatepicker #saleDateDp="ngbDatepicker"
+                  required>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar"
+                    (click)="saleDateDp.toggle()"
+                    type="button"></button>
+                </div>
+                <div class="invalid-feedback" *ngIf="invoiceForm.submitted && saleDate.invalid">
+                  <p *ngIf="saleDate.errors">Sale date is required</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit"
+              class="btn btn-primary btn-block">
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

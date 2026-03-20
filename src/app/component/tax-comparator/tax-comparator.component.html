@@ -1,0 +1,76 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form #incomeCostForm="ngForm"
+      (ngSubmit)="incomeCostForm.form.valid && onSubmit()">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="incomeNetValue">Net income</label>
+              <input type="text"
+                [(ngModel)]="income.netValue"
+                class="form-control"
+                id="incomeNetValue"
+                name="incomeNetValue"
+                #incomeNetValue="ngModel"
+                [ngClass]="{ 'is-invalid': incomeCostForm.submitted && incomeNetValue.invalid }"
+                required>
+              <div class="invalid-feedback" *ngIf="incomeCostForm.submitted && incomeNetValue.invalid">
+                <p *ngIf="incomeNetValue.errors">Net income is required</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="costNetValue">Net cost</label>
+              <input type="text"
+                [(ngModel)]="cost.netValue"
+                class="form-control"
+                id="costNetValue"
+                name="costNetValue"
+                #costNetValue="ngModel"
+                [ngClass]="{ 'is-invalid': incomeCostForm.submitted && costNetValue.invalid }"
+                required>
+              <div class="invalid-feedback" *ngIf="incomeCostForm.submitted && costNetValue.invalid">
+                <p *ngIf="costNetValue.errors">Net cost is required</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit"
+              style="margin-top: 0.5em"
+              class="btn btn-primary btn-block">
+              Calculate
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+
+    <div class="container my-5">
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr *ngIf="calculationResults != null">
+          <th>Form of taxation</th>
+          <th>Income</th>
+          <th>Tax to pay</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let result of calculationResults">
+          <th scope="row">{{result.name}}</th>
+          <td>{{result.income}}</td>
+          <td>{{result.taxToPay}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
